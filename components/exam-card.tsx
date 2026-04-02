@@ -13,9 +13,16 @@ type ExamCardProps = {
     questionCount: number;
     isPremium: boolean;
   };
+  copy: {
+    freeAccess: string;
+    advancedSet: string;
+    openExam: string;
+    min: string;
+    questions: string;
+  };
 };
 
-export function ExamCard({ exam }: ExamCardProps) {
+export function ExamCard({ exam, copy }: ExamCardProps) {
   return (
     <article className="editorial-card group relative overflow-hidden rounded-[2rem] p-6 transition hover:-translate-y-1">
       <div className="absolute inset-x-6 top-0 h-px bg-gradient-to-r from-transparent via-[color:var(--brand)]/70 to-transparent" />
@@ -31,12 +38,12 @@ export function ExamCard({ exam }: ExamCardProps) {
         {exam.isPremium ? (
           <span className="inline-flex items-center gap-2 text-xs text-[color:var(--brand)]">
             <LockKeyhole className="h-4 w-4" />
-            Advanced set
+            {copy.advancedSet}
           </span>
         ) : (
           <span className="inline-flex items-center gap-2 text-xs text-[color:var(--accent)]">
             <Sparkles className="h-4 w-4" />
-            Free access
+            {copy.freeAccess}
           </span>
         )}
       </div>
@@ -54,10 +61,10 @@ export function ExamCard({ exam }: ExamCardProps) {
         </span>
         <span className="inline-flex items-center gap-2 rounded-full border border-[var(--line)] px-3 py-1">
           <Clock3 className="h-4 w-4 text-[color:var(--brand)]" />
-          {exam.durationMinutes} min
+          {exam.durationMinutes} {copy.min}
         </span>
         <span className="rounded-full border border-[var(--line)] px-3 py-1">
-          {exam.questionCount} questions
+          {exam.questionCount} {copy.questions}
         </span>
       </div>
 
@@ -65,7 +72,7 @@ export function ExamCard({ exam }: ExamCardProps) {
         href={`/exams/${exam.slug}`}
         className="mt-8 inline-flex items-center gap-2 rounded-full bg-[linear-gradient(135deg,var(--brand),var(--brand-2))] px-5 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:scale-[1.01] hover:shadow-lg hover:shadow-[color:var(--brand)]/15"
       >
-        Open exam
+        {copy.openExam}
         <ArrowRight className="h-4 w-4" />
       </Link>
     </article>

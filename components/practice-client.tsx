@@ -13,12 +13,23 @@ type PracticeClientProps = {
     answer: string;
     explanation: string;
   }>;
+  copy: {
+    eyebrow: string;
+    description: string;
+    question: string;
+    textareaPlaceholder: string;
+    saveResult: string;
+    saved: string;
+    loginToSave: string;
+    score: string;
+  };
 };
 
 export function PracticeClient({
   examId,
   title,
-  questions
+  questions,
+  copy
 }: PracticeClientProps) {
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [result, setResult] = useState<null | { score: number }>(null);
@@ -49,25 +60,25 @@ export function PracticeClient({
     const data = (await response.json()) as { score?: number; error?: string };
 
     if (!response.ok) {
-      setMessage(data.error || "Please log in to save your score.");
+      setMessage(data.error || copy.loginToSave);
       return;
     }
 
     setResult({ score: data.score || score });
-    setMessage("Your practice result was saved.");
+    setMessage(copy.saved);
   }
 
   return (
     <div className="space-y-6">
       <div className="editorial-card rounded-[2rem] p-8">
         <p className="text-sm uppercase tracking-[0.3em] text-[color:var(--brand)]">
-          Practice Mode
+          {copy.eyebrow}
         </p>
         <h1 className="mt-3 text-3xl font-semibold text-[color:var(--foreground)]">
           {title}
         </h1>
         <p className="mt-3 text-[color:var(--ink-soft)]">
-          Work through each task, then save your result when you finish.
+          {copy.description}
         </p>
       </div>
 
@@ -76,7 +87,9 @@ export function PracticeClient({
           key={question._id}
           className="editorial-card rounded-[2rem] p-8"
         >
-          <p className="text-sm text-[color:var(--brand)]">Question {index + 1}</p>
+          <p className="text-sm text-[color:var(--brand)]">
+            {copy.question} {index + 1}
+          </p>
           <h2 className="mt-2 text-xl font-medium text-[color:var(--foreground)]">
             {question.prompt}
           </h2>
@@ -114,7 +127,7 @@ export function PracticeClient({
                   }))
                 }
                 className="w-full rounded-2xl border border-[var(--line)] bg-white/70 px-4 py-3 text-[color:var(--foreground)] outline-none focus:border-[color:var(--brand)]"
-                placeholder="Write your answer here"
+                placeholder={copy.textareaPlaceholder}
               />
             )}
           </div>
@@ -126,11 +139,11 @@ export function PracticeClient({
           onClick={submit}
           className="rounded-full bg-[linear-gradient(135deg,var(--brand),var(--brand-2))] px-5 py-3 text-sm font-semibold text-white"
         >
-          Save result
+          {copy.saveResult}
         </button>
         {result ? (
           <p className="mt-4 text-lg font-medium text-[color:var(--accent)]">
-            Score: {result.score}%
+            {copy.score}: {result.score}%
           </p>
         ) : null}
         {message ? (

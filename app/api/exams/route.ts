@@ -1,7 +1,9 @@
 import { NextResponse } from "next/server";
 
-import { sampleExams } from "@/lib/sample-data";
+import { getLocale } from "@/lib/i18n";
+import { getSampleExams } from "@/lib/sample-data";
 
 export async function GET() {
-  return NextResponse.json(sampleExams);
+  const locale = await getLocale();
+  return NextResponse.json(getSampleExams(locale));
 }

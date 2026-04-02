@@ -5,9 +5,22 @@ import { useRouter } from "next/navigation";
 
 type AuthFormProps = {
   mode: "login" | "register";
+  copy: {
+    firstName: string;
+    firstNamePlaceholder: string;
+    lastName: string;
+    optional: string;
+    lastNamePlaceholder: string;
+    email: string;
+    password: string;
+    passwordPlaceholder: string;
+    login: string;
+    createAccount: string;
+    genericError: string;
+  };
 };
 
-export function AuthForm({ mode }: AuthFormProps) {
+export function AuthForm({ mode, copy }: AuthFormProps) {
   const router = useRouter();
   const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
@@ -27,7 +40,7 @@ export function AuthForm({ mode }: AuthFormProps) {
 
     if (!response.ok) {
       const data = (await response.json()) as { error?: string };
-      setError(data.error || "Something went wrong.");
+      setError(data.error || copy.genericError);
       setPending(false);
       return;
     }
@@ -44,30 +57,30 @@ export function AuthForm({ mode }: AuthFormProps) {
       {mode === "register" ? (
         <>
           <div>
-            <label className="mb-2 block text-sm text-slate-300">First name</label>
+            <label className="mb-2 block text-sm text-slate-300">{copy.firstName}</label>
             <input
               name="name"
               required
               className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none transition focus:border-amber-300"
-              placeholder="Your first name"
+              placeholder={copy.firstNamePlaceholder}
             />
           </div>
 
           <div>
             <label className="mb-2 block text-sm text-slate-300">
-              Last name <span className="text-slate-500">(optional)</span>
+              {copy.lastName} <span className="text-slate-500">({copy.optional})</span>
             </label>
             <input
               name="lastname"
               className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none transition focus:border-amber-300"
-              placeholder="Your last name"
+              placeholder={copy.lastNamePlaceholder}
             />
           </div>
         </>
       ) : null}
 
       <div>
-        <label className="mb-2 block text-sm text-slate-300">Email</label>
+        <label className="mb-2 block text-sm text-slate-300">{copy.email}</label>
         <input
           type="email"
           name="email"
@@ -78,13 +91,13 @@ export function AuthForm({ mode }: AuthFormProps) {
       </div>
 
       <div>
-        <label className="mb-2 block text-sm text-slate-300">Password</label>
+        <label className="mb-2 block text-sm text-slate-300">{copy.password}</label>
         <input
           type="password"
           name="password"
           required
           className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none transition focus:border-amber-300"
-          placeholder="Minimum 6 characters"
+          placeholder={copy.passwordPlaceholder}
         />
       </div>
 
@@ -96,10 +109,10 @@ export function AuthForm({ mode }: AuthFormProps) {
         className="w-full rounded-full bg-[linear-gradient(135deg,var(--brand),var(--brand-2))] px-5 py-3 text-sm font-semibold text-slate-950 transition hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-70"
       >
         {pending
-          ? "Please wait..."
+          ? "..."
           : mode === "login"
-            ? "Log in"
-            : "Create my free account"}
+            ? copy.login
+            : copy.createAccount}
       </button>
     </form>
   );

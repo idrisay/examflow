@@ -1,7 +1,8 @@
 import Link from "next/link";
 
 import { getSession } from "@/lib/auth";
-import { sampleExams, sampleQuestions } from "@/lib/sample-data";
+import { getTranslations } from "@/lib/i18n";
+import { getSampleExams, getSampleQuestions } from "@/lib/sample-data";
 import { PracticeClient } from "@/components/practice-client";
 import { createClient } from "@/utils/supabase/server";
 
@@ -10,8 +11,11 @@ type PracticePageProps = {
 };
 
 export default async function PracticePage({ searchParams }: PracticePageProps) {
+  const { locale, messages } = await getTranslations();
   const session = await getSession();
   const { exam: examSlug } = await searchParams;
+  const sampleExams = getSampleExams(locale);
+  const sampleQuestions = getSampleQuestions(locale);
 
   const selectedExam =
     sampleExams.find((item) => item.slug === examSlug) || sampleExams[0];
@@ -51,15 +55,16 @@ export default async function PracticePage({ searchParams }: PracticePageProps) 
             examId={selectedExam.slug}
             title={selectedExam.title}
             questions={questions}
+            copy={messages.practiceClient}
           />
 
           <aside className="space-y-6">
             <div className="editorial-card rounded-[2rem] p-8">
               <p className="text-sm uppercase tracking-[0.3em] text-[color:var(--brand)]">
-                Your dashboard
+                {messages.practice.dashboardEyebrow}
               </p>
               <h2 className="mt-3 text-2xl font-semibold text-[color:var(--foreground)]">
-                Recent progress
+                {messages.practice.dashboardTitle}
               </h2>
               <div className="mt-5 space-y-3">
                 {attempts.length > 0 ? (
@@ -69,14 +74,14 @@ export default async function PracticePage({ searchParams }: PracticePageProps) 
                       className="rounded-2xl border border-[var(--line)] bg-white/70 px-4 py-3"
                     >
                       <p className="text-sm text-[color:var(--foreground)]">
-                        {attempt.score}% score
+                        {attempt.score}{messages.practice.scoreSuffix}
                       </p>
                       <p className="text-xs text-[color:var(--ink-soft)]">{attempt.createdAt}</p>
                     </div>
                   ))
                 ) : (
                   <p className="text-sm text-[color:var(--ink-soft)]">
-                    No saved attempts yet. Finish one practice set to start.
+                    {messages.practice.noAttempts}
                   </p>
                 )}
               </div>
@@ -86,28 +91,26 @@ export default async function PracticePage({ searchParams }: PracticePageProps) 
       ) : (
         <div className="editorial-card rounded-[2.5rem] p-8">
           <p className="text-sm uppercase tracking-[0.3em] text-[color:var(--brand)]">
-            Practice access
+            {messages.practice.accessEyebrow}
           </p>
           <h1 className="mt-4 text-4xl font-semibold text-[color:var(--foreground)]">
-            Save your TELC, fide, and Goethe practice history
+            {messages.practice.accessTitle}
           </h1>
           <p className="mt-4 max-w-2xl text-[color:var(--ink-soft)]">
-            You can browse the exam library without an account, but signing in lets
-            you keep scores, compare attempts, and turn random study sessions into a
-            real plan.
+            {messages.practice.accessDescription}
           </p>
           <div className="mt-8 flex flex-wrap gap-4">
             <Link
               href="/register"
               className="rounded-full bg-[linear-gradient(135deg,var(--brand),var(--brand-2))] px-5 py-3 text-sm font-semibold text-white"
             >
-              Create free account
+              {messages.practice.createAccount}
             </Link>
             <Link
               href="/login"
               className="rounded-full border border-[var(--line)] bg-white/60 px-5 py-3 text-sm font-semibold text-[color:var(--foreground)]"
             >
-              Log in
+              {messages.practice.login}
             </Link>
           </div>
         </div>

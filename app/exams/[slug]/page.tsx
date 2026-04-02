@@ -1,14 +1,18 @@
 import Link from "next/link";
 import { notFound } from "next/navigation";
 
-import { sampleExams, sampleQuestions } from "@/lib/sample-data";
+import { getTranslations } from "@/lib/i18n";
+import { getSampleExams, getSampleQuestions } from "@/lib/sample-data";
 
 type ExamDetailPageProps = {
   params: Promise<{ slug: string }>;
 };
 
 export default async function ExamDetailPage({ params }: ExamDetailPageProps) {
+  const { locale, messages } = await getTranslations();
   const { slug } = await params;
+  const sampleExams = getSampleExams(locale);
+  const sampleQuestions = getSampleQuestions(locale);
   const fallbackExam = sampleExams.find((item) => item.slug === slug);
   const fallbackQuestions = sampleQuestions.filter((item) => item.examSlug === slug);
 
@@ -35,10 +39,10 @@ export default async function ExamDetailPage({ params }: ExamDetailPageProps) {
             {exam.category}
           </span>
           <span className="rounded-full border border-[var(--line)] px-3 py-1">
-            {exam.durationMinutes} min
+            {exam.durationMinutes} {messages.common.min}
           </span>
           <span className="rounded-full border border-[var(--line)] px-3 py-1">
-            {questions.length} sample questions
+            {questions.length} {messages.examDetail.sampleQuestions}
           </span>
         </div>
 
@@ -47,13 +51,13 @@ export default async function ExamDetailPage({ params }: ExamDetailPageProps) {
             href="/register"
             className="rounded-full bg-[linear-gradient(135deg,var(--brand),var(--brand-2))] px-5 py-3 text-sm font-semibold text-white"
           >
-            Log in for full practice
+            {messages.examDetail.loginForPractice}
           </Link>
           <Link
             href={`/practice?exam=${exam.slug}`}
             className="rounded-full border border-[var(--line)] bg-white/60 px-5 py-3 text-sm font-semibold text-[color:var(--foreground)]"
           >
-            Practice now
+            {messages.examDetail.practiceNow}
           </Link>
         </div>
       </div>
@@ -64,7 +68,9 @@ export default async function ExamDetailPage({ params }: ExamDetailPageProps) {
             key={`${question.prompt}-${index}`}
             className="editorial-card rounded-[2rem] p-8"
           >
-            <p className="text-sm text-[color:var(--brand)]">Preview question {index + 1}</p>
+            <p className="text-sm text-[color:var(--brand)]">
+              {messages.examDetail.previewQuestion} {index + 1}
+            </p>
             <h2 className="mt-2 text-2xl font-medium text-[color:var(--foreground)]">
               {question.prompt}
             </h2>
@@ -81,7 +87,7 @@ export default async function ExamDetailPage({ params }: ExamDetailPageProps) {
               </ul>
             ) : (
               <p className="mt-4 text-[color:var(--ink-soft)]">
-                This is an open response question for speaking or writing practice.
+                {messages.examDetail.openResponse}
               </p>
             )}
           </section>
