@@ -14,7 +14,7 @@ export async function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--line)] bg-[color:var(--panel)] backdrop-blur-xl">
-      <HeaderAnnouncement text={messages.announcement} />
+      <HeaderAnnouncement text={messages.announcement} ctaLabel={messages.nav.support} />
 
       <div className="mx-auto max-w-7xl px-4 py-3 sm:px-6 sm:py-4 lg:px-8">
         <div className="hidden items-start justify-between gap-3 md:items-center md:flex">

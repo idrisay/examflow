@@ -74,7 +74,7 @@ export function getDirection(locale: Locale) {
 
 const translations = {
   en: {
-    announcement: "Practice German Exams With Realistic Formats",
+    announcement: "Support us in improving the website so we can help even more learners succeed.",
     logoTagline: "TELC, fide, Goethe and more",
     nav: {
       exams: "Exams",
