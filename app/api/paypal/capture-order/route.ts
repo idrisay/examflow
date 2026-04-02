@@ -66,7 +66,11 @@ export async function POST(request: Request) {
     return NextResponse.json({
       message: "Payment completed. Thank you for supporting ExamFlow."
     });
-  } catch {
-    return NextResponse.json({ error: "Unable to capture PayPal payment." }, { status: 500 });
+  } catch (error) {
+    const message =
+      error instanceof Error && error.message
+        ? error.message
+        : "Unable to capture PayPal payment.";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }

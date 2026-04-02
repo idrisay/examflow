@@ -49,29 +49,37 @@ export function PayPalSupport({
         },
         createOrder: async () => {
           setMessage("");
+          try {
+            const response = await fetch("/api/paypal/create-order", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                name,
+                email,
+                amount: selectedAmount,
+                currency,
+                message: note
+              })
+            });
 
-          const response = await fetch("/api/paypal/create-order", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({
-              name,
-              email,
-              amount: selectedAmount,
-              currency,
-              message: note
-            })
-          });
+            const data = (await response.json()) as {
+              error?: string;
+              orderId?: string;
+            };
 
-          const data = (await response.json()) as {
-            error?: string;
-            orderId?: string;
-          };
+            if (!response.ok || !data.orderId) {
+              throw new Error(data.error || "Unable to create PayPal order.");
+            }
 
-          if (!response.ok || !data.orderId) {
-            throw new Error(data.error || "Unable to create PayPal order.");
+            return data.orderId;
+          } catch (error) {
+            const message =
+              error instanceof Error && error.message
+                ? error.message
+                : "Unable to create PayPal order.";
+            setMessage(message);
+            throw error;
           }
-
-          return data.orderId;
         },
         onApprove: async ({ orderID }) => {
           const response = await fetch("/api/paypal/capture-order", {
@@ -97,8 +105,11 @@ export function PayPalSupport({
           setPaymentComplete(true);
           setMessage(data.message || "Thank you for supporting the platform.");
         },
-        onError: () => {
-          setMessage("PayPal could not start. Please try again.");
+        onError: (error) => {
+          const fallback = "PayPal could not start. Please try again.";
+          const message =
+            error instanceof Error && error.message ? error.message : fallback;
+          setMessage(message);
         }
       })
       .render(buttonContainerRef.current);

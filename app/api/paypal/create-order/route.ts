@@ -57,7 +57,11 @@ export async function POST(request: Request) {
     }
 
     return NextResponse.json({ orderId: order.id });
-  } catch {
-    return NextResponse.json({ error: "Unable to create PayPal order." }, { status: 500 });
+  } catch (error) {
+    const message =
+      error instanceof Error && error.message
+        ? error.message
+        : "Unable to create PayPal order.";
+    return NextResponse.json({ error: message }, { status: 500 });
   }
 }
