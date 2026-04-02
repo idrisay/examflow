@@ -17,22 +17,22 @@ export default async function AdminPage() {
 
   return (
     <div className="mx-auto max-w-6xl px-6 py-16 lg:px-8">
-      <div className="rounded-[2.5rem] border border-emerald-400/20 bg-emerald-400/10 p-8">
-        <p className="text-sm font-semibold uppercase tracking-[0.35em] text-emerald-200">
+      <div className="rounded-[2.5rem] border border-[color:var(--accent)]/20 bg-[color:var(--status-success-soft)] p-8">
+        <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[color:var(--status-success)]">
           Admin Area
         </p>
-        <h1 className="mt-4 text-4xl font-semibold text-white">
+        <h1 className="mt-4 text-4xl font-semibold text-[color:var(--foreground)]">
           Welcome back, {profile.name}
         </h1>
-        <p className="mt-4 max-w-2xl text-slate-200">
+        <p className="mt-4 max-w-2xl text-[color:var(--ink-soft)]">
           This page is protected and only visible to users whose profile role is
           set to `admin` in Supabase.
         </p>
-        <div className="mt-6 flex flex-wrap gap-3 text-sm text-slate-200">
-          <span className="rounded-full border border-white/10 px-4 py-2">
+        <div className="mt-6 flex flex-wrap gap-3 text-sm text-[color:var(--foreground)]">
+          <span className="rounded-full border border-[var(--line)] px-4 py-2">
             {profile.email}
           </span>
-          <span className="rounded-full border border-emerald-300/20 bg-emerald-300/10 px-4 py-2 text-emerald-100">
+          <span className="rounded-full border border-[color:var(--accent)]/20 bg-[color:var(--status-success-soft)] px-4 py-2 text-[color:var(--status-success)]">
             Role: {profile.role}
           </span>
         </div>
@@ -63,25 +63,25 @@ export default async function AdminPage() {
         ].map((item) => (
           <div
             key={item.title}
-            className="rounded-[2rem] border border-white/10 bg-white/5 p-6"
+            className="editorial-card rounded-[2rem] p-6"
           >
-            <item.icon className="h-6 w-6 text-amber-300" />
-            <h2 className="mt-4 text-xl font-semibold text-white">{item.title}</h2>
-            <p className="mt-3 text-sm leading-6 text-slate-300">{item.copy}</p>
+            <item.icon className="h-6 w-6 text-[color:var(--brand)]" />
+            <h2 className="mt-4 text-xl font-semibold text-[color:var(--foreground)]">{item.title}</h2>
+            <p className="mt-3 text-sm leading-6 text-[color:var(--ink-soft)]">{item.copy}</p>
           </div>
         ))}
       </div>
 
-      <div className="mt-10 rounded-[2rem] border border-white/10 bg-white/5 p-8">
-        <p className="text-lg font-semibold text-white">Next setup steps</p>
-        <p className="mt-3 text-slate-300">
+      <div className="editorial-card mt-10 rounded-[2rem] p-8">
+        <p className="text-lg font-semibold text-[color:var(--foreground)]">Next setup steps</p>
+        <p className="mt-3 text-[color:var(--ink-soft)]">
           Run the SQL in `supabase/schema.sql`, set your service role key in
           `.env.local`, then run `npm run create:admin` to ensure your admin user
           and profile row exist.
         </p>
         <Link
           href="/support"
-          className="mt-6 inline-flex rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-200"
+          className="mt-6 inline-flex rounded-full bg-[color:var(--foreground)] px-5 py-3 text-sm font-semibold text-[color:var(--panel-strong)] transition hover:bg-[color:var(--brand)] hover:text-white"
         >
           Back to site
         </Link>

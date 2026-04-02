@@ -31,7 +31,7 @@ export function SupportForm() {
   return (
     <form
       action={handleSubmit}
-      className="space-y-5 rounded-[2rem] border border-white/10 bg-white/5 p-8"
+      className="editorial-card space-y-5 rounded-[2rem] p-8"
     >
       <div className="grid gap-3 sm:grid-cols-4">
         {presets.map((amount) => (
@@ -41,8 +41,8 @@ export function SupportForm() {
             onClick={() => setSelectedAmount(amount)}
             className={`rounded-2xl border px-4 py-4 text-left transition ${
               selectedAmount === amount
-                ? "border-amber-300 bg-amber-300/10 text-amber-100"
-                : "border-white/10 bg-slate-950/70 text-slate-300"
+                ? "border-[color:var(--brand)] bg-[color:var(--status-success-soft)] text-[color:var(--foreground)]"
+                : "border-[var(--line)] bg-[color:var(--surface-muted)] text-[color:var(--ink-soft)]"
             }`}
           >
             {formatCurrency(amount)}
@@ -54,37 +54,37 @@ export function SupportForm() {
 
       <div className="grid gap-5 md:grid-cols-2">
         <div>
-          <label className="mb-2 block text-sm text-slate-300">Name</label>
+          <label className="mb-2 block text-sm text-[color:var(--ink-soft)]">Name</label>
           <input
             name="name"
             required
-            className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none focus:border-amber-300"
+            className="field-input px-4 py-3"
           />
         </div>
         <div>
-          <label className="mb-2 block text-sm text-slate-300">Email</label>
+          <label className="mb-2 block text-sm text-[color:var(--ink-soft)]">Email</label>
           <input
             name="email"
             type="email"
             required
-            className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none focus:border-amber-300"
+            className="field-input px-4 py-3"
           />
         </div>
       </div>
 
       <div>
-        <label className="mb-2 block text-sm text-slate-300">Message</label>
+        <label className="mb-2 block text-sm text-[color:var(--ink-soft)]">Message</label>
         <textarea
           name="message"
           rows={4}
-          className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none focus:border-amber-300"
+          className="field-input px-4 py-3"
           placeholder="Optional encouragement for the project."
         />
       </div>
 
-      {message ? <p className="text-sm text-amber-100">{message}</p> : null}
+      {message ? <p className="text-sm text-[color:var(--status-success)]">{message}</p> : null}
 
-      <button className="rounded-full bg-white px-5 py-3 text-sm font-semibold text-slate-950 transition hover:bg-amber-200">
+      <button className="rounded-full bg-[color:var(--foreground)] px-5 py-3 text-sm font-semibold text-[color:var(--panel-strong)] transition hover:bg-[color:var(--brand)] hover:text-white">
         Support this free platform
       </button>
     </form>

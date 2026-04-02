@@ -52,27 +52,27 @@ export function AuthForm({ mode, copy }: AuthFormProps) {
   return (
     <form
       action={handleSubmit}
-      className="space-y-5 rounded-[2rem] border border-white/10 bg-white/5 p-8 shadow-2xl shadow-black/20"
+      className="editorial-card space-y-5 rounded-[2rem] p-8"
     >
       {mode === "register" ? (
         <>
           <div>
-            <label className="mb-2 block text-sm text-slate-300">{copy.firstName}</label>
+            <label className="mb-2 block text-sm text-[color:var(--ink-soft)]">{copy.firstName}</label>
             <input
               name="name"
               required
-              className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none transition focus:border-amber-300"
+              className="field-input px-4 py-3"
               placeholder={copy.firstNamePlaceholder}
             />
           </div>
 
           <div>
-            <label className="mb-2 block text-sm text-slate-300">
-              {copy.lastName} <span className="text-slate-500">({copy.optional})</span>
+            <label className="mb-2 block text-sm text-[color:var(--ink-soft)]">
+              {copy.lastName} <span className="text-[color:var(--field-placeholder)]">({copy.optional})</span>
             </label>
             <input
               name="lastname"
-              className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none transition focus:border-amber-300"
+              className="field-input px-4 py-3"
               placeholder={copy.lastNamePlaceholder}
             />
           </div>
@@ -80,33 +80,33 @@ export function AuthForm({ mode, copy }: AuthFormProps) {
       ) : null}
 
       <div>
-        <label className="mb-2 block text-sm text-slate-300">{copy.email}</label>
+        <label className="mb-2 block text-sm text-[color:var(--ink-soft)]">{copy.email}</label>
         <input
           type="email"
           name="email"
           required
-          className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none transition focus:border-amber-300"
+          className="field-input px-4 py-3"
           placeholder="you@example.com"
         />
       </div>
 
       <div>
-        <label className="mb-2 block text-sm text-slate-300">{copy.password}</label>
+        <label className="mb-2 block text-sm text-[color:var(--ink-soft)]">{copy.password}</label>
         <input
           type="password"
           name="password"
           required
-          className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none transition focus:border-amber-300"
+          className="field-input px-4 py-3"
           placeholder={copy.passwordPlaceholder}
         />
       </div>
 
-      {error ? <p className="text-sm text-rose-300">{error}</p> : null}
+      {error ? <p className="text-sm text-[color:var(--status-danger)]">{error}</p> : null}
 
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded-full bg-[linear-gradient(135deg,var(--brand),var(--brand-2))] px-5 py-3 text-sm font-semibold text-slate-950 transition hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-70"
+        className="w-full rounded-full bg-[linear-gradient(135deg,var(--brand),var(--brand-2))] px-5 py-3 text-sm font-semibold text-[color:var(--foreground)] transition hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-70"
       >
         {pending
           ? "..."

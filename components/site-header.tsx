@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { DoorOpen, LogIn, UserPlus } from "lucide-react";
 
 import { getSession } from "@/lib/auth";
 import { HeaderAnnouncement } from "@/components/header-announcement";
@@ -89,23 +90,31 @@ export async function SiteHeader() {
 
             {session ? (
               <form action="/api/auth/logout" method="post">
-                <button className="rounded-full border border-[var(--line)] px-4 py-2 text-sm font-medium text-[color:var(--foreground)] transition hover:border-[color:var(--brand)] hover:text-[color:var(--brand)]">
-                  {messages.nav.logout}
+                <button
+                  aria-label={messages.nav.logout}
+                  title={messages.nav.logout}
+                  className="rounded-full border border-[var(--line)] p-2.5 text-[color:var(--foreground)] transition hover:border-[color:var(--brand)] hover:text-[color:var(--brand)]"
+                >
+                  <DoorOpen className="h-4 w-4" />
                 </button>
               </form>
             ) : (
               <>
                 <Link
                   href="/login"
-                  className="rounded-full border border-[var(--line)] px-3 py-2 text-sm font-medium text-[color:var(--foreground)] transition hover:border-[color:var(--brand)] hover:text-[color:var(--brand)]"
+                  aria-label={messages.nav.login}
+                  title={messages.nav.login}
+                  className="rounded-full border border-[var(--line)] p-2.5 text-[color:var(--foreground)] transition hover:border-[color:var(--brand)] hover:text-[color:var(--brand)]"
                 >
-                  {messages.nav.login}
+                  <LogIn className="h-4 w-4" />
                 </Link>
                 <Link
                   href="/register"
-                  className="rounded-full bg-[linear-gradient(135deg,var(--brand),var(--brand-2))] px-3 py-2 text-sm font-semibold text-white transition hover:scale-[1.02]"
+                  aria-label={messages.nav.join}
+                  title={messages.nav.join}
+                  className="rounded-full bg-[linear-gradient(135deg,var(--brand),var(--brand-2))] p-2.5 text-white transition hover:scale-[1.02]"
                 >
-                  {messages.nav.join}
+                  <UserPlus className="h-4 w-4" />
                 </Link>
               </>
             )}

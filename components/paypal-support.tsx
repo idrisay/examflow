@@ -127,7 +127,7 @@ export function PayPalSupport({
   }, [activeAmount, canRenderButtons, currency, email, name, note]);
 
   return (
-    <div className="space-y-5 rounded-[2rem] border border-white/10 bg-white/5 p-8">
+    <div className="editorial-card space-y-5 rounded-[2rem] p-8">
       <div className="grid gap-3 sm:grid-cols-5">
         {presets.map((amount) => (
           <button
@@ -139,8 +139,8 @@ export function PayPalSupport({
             }}
             className={`rounded-2xl border px-4 py-4 text-left transition ${
               customAmount.length === 0 && selectedAmount === amount
-                ? "border-amber-300 bg-amber-300/10 text-amber-100"
-                : "border-white/10 bg-slate-950/70 text-slate-300"
+                ? "border-[color:var(--brand)] bg-[color:var(--status-success-soft)] text-[color:var(--foreground)]"
+                : "border-[var(--line)] bg-[color:var(--surface-muted)] text-[color:var(--ink-soft)]"
             }`}
           >
             {formatCurrency(amount)}
@@ -149,11 +149,11 @@ export function PayPalSupport({
         <div
           className={`rounded-2xl border px-4 py-3 transition ${
             customAmount.length > 0
-              ? "border-amber-300 bg-amber-300/10"
-              : "border-white/10 bg-slate-950/70"
+              ? "border-[color:var(--brand)] bg-[color:var(--status-success-soft)]"
+              : "border-[var(--line)] bg-[color:var(--surface-muted)]"
           }`}
         >
-          <label className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.18em] text-slate-400">
+          <label className="mb-1 block text-[11px] font-semibold uppercase tracking-[0.18em] text-[color:var(--ink-soft)]">
             Other
           </label>
           <input
@@ -163,7 +163,7 @@ export function PayPalSupport({
             inputMode="decimal"
             value={customAmount}
             onChange={(event) => setCustomAmount(event.target.value)}
-            className="w-full bg-transparent text-left text-lg text-white outline-none placeholder:text-sm placeholder:text-slate-500"
+            className="w-full bg-transparent text-left text-lg text-[color:var(--field-text)] outline-none placeholder:text-sm placeholder:text-[color:var(--field-placeholder)]"
             placeholder="$"
           />
         </div>
@@ -171,40 +171,40 @@ export function PayPalSupport({
 
       <div className="grid gap-5 md:grid-cols-2">
         <div>
-          <label className="mb-2 block text-sm text-slate-300">Name</label>
+          <label className="mb-2 block text-sm text-[color:var(--ink-soft)]">Name</label>
           <input
             value={name}
             onChange={(event) => setName(event.target.value)}
             required
-            className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none focus:border-amber-300"
+            className="field-input px-4 py-3"
           />
         </div>
         <div>
-          <label className="mb-2 block text-sm text-slate-300">Email</label>
+          <label className="mb-2 block text-sm text-[color:var(--ink-soft)]">Email</label>
           <input
             type="email"
             value={email}
             onChange={(event) => setEmail(event.target.value)}
             required
-            className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none focus:border-amber-300"
+            className="field-input px-4 py-3"
           />
         </div>
       </div>
 
       <div>
-        <label className="mb-2 block text-sm text-slate-300">Message</label>
+        <label className="mb-2 block text-sm text-[color:var(--ink-soft)]">Message</label>
         <textarea
           rows={4}
           value={note}
           onChange={(event) => setNote(event.target.value)}
-          className="w-full rounded-2xl border border-white/10 bg-slate-950/80 px-4 py-3 text-white outline-none focus:border-amber-300"
+          className="field-input px-4 py-3"
           placeholder="Optional encouragement for the project."
         />
       </div>
 
-      <div className="rounded-2xl border border-white/10 bg-slate-950/70 px-4 py-4">
-        <p className="text-sm text-slate-300">Support amount</p>
-        <p className="mt-1 text-2xl font-semibold text-white">
+      <div className="rounded-2xl border border-[var(--line)] bg-[color:var(--surface-muted)] px-4 py-4">
+        <p className="text-sm text-[color:var(--ink-soft)]">Support amount</p>
+        <p className="mt-1 text-2xl font-semibold text-[color:var(--foreground)]">
           {Number.isFinite(activeAmount) && activeAmount >= 1
             ? formatCurrency(activeAmount)
             : "Enter at least $1"}
@@ -220,11 +220,11 @@ export function PayPalSupport({
           />
 
           {!name.trim() || !email.trim() ? (
-            <p className="text-sm text-slate-300">
+            <p className="text-sm text-[color:var(--ink-soft)]">
               Enter your name and email to enable the PayPal button.
             </p>
           ) : !Number.isFinite(activeAmount) || activeAmount < 1 ? (
-            <p className="text-sm text-slate-300">
+            <p className="text-sm text-[color:var(--ink-soft)]">
               Enter a support amount of at least $1 to enable PayPal.
             </p>
           ) : null}
@@ -235,12 +235,12 @@ export function PayPalSupport({
           />
         </>
       ) : (
-        <div className="rounded-2xl border border-dashed border-amber-300/30 bg-amber-300/10 px-4 py-4 text-sm text-amber-100">
+        <div className="rounded-2xl border border-dashed border-[color:var(--brand)]/30 bg-[color:var(--status-success-soft)] px-4 py-4 text-sm text-[color:var(--foreground)]">
           Add your PayPal API credentials to `.env.local` to enable live checkout.
         </div>
       )}
 
-      {message ? <p className="text-sm text-amber-100">{message}</p> : null}
+      {message ? <p className="text-sm text-[color:var(--status-success)]">{message}</p> : null}
     </div>
   );
 }
