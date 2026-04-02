@@ -1,6 +1,7 @@
 import Link from "next/link";
 
 import { getSession } from "@/lib/auth";
+import { HeaderAnnouncement } from "@/components/header-announcement";
 import { Logo } from "@/components/logo";
 import { ThemeToggle } from "@/components/theme-toggle";
 
@@ -9,11 +10,7 @@ export async function SiteHeader() {
 
   return (
     <header className="sticky top-0 z-30 border-b border-[var(--line)] bg-[color:var(--panel)] backdrop-blur-xl">
-      <div className="border-b border-[var(--line)] bg-[color:var(--accent-soft)]">
-        <div className="mx-auto max-w-7xl px-6 py-2 text-center text-xs font-semibold uppercase tracking-[0.3em] text-[color:var(--accent)] lg:px-8">
-          Practice German Exams With Realistic Formats
-        </div>
-      </div>
+      <HeaderAnnouncement />
 
       <div className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-8">
         <Link href="/">

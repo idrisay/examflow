@@ -25,7 +25,10 @@ export const metadata: Metadata = {
   description:
     "A modern German exam practice platform for TELC, fide, Goethe, and more with free sample access, saved progress, and community support.",
   icons: {
-    icon: "/icon.svg"
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.svg", type: "image/svg+xml", rel: "icon" }
+    ]
   }
 };
 

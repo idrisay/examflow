@@ -5,7 +5,7 @@ export function Logo() {
         <img
           src="/icon.svg"
           alt="FreeExamPrep logo"
-          className="h-full w-full"
+          className="h-10 w-10 object-contain object-center"
         />
       </div>
       <div>

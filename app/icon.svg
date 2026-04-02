@@ -1,14 +1,39 @@
 <svg width="128" height="128" viewBox="0 0 128 128" fill="none" xmlns="http://www.w3.org/2000/svg">
   <defs>
-    <linearGradient id="icon-gradient" x1="24" y1="18" x2="104" y2="110" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#F7CF66"/>
-      <stop offset="1" stop-color="#F38A5D"/>
+    <linearGradient id="exam-bg" x1="20" y1="16" x2="104" y2="112" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#E7A84B"/>
+      <stop offset="1" stop-color="#CF5F3F"/>
+    </linearGradient>
+    <linearGradient id="paper-fill" x1="34" y1="28" x2="88" y2="92" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFDF8"/>
+      <stop offset="1" stop-color="#F8ECDD"/>
     </linearGradient>
   </defs>
-  <rect x="14" y="14" width="100" height="100" rx="30" fill="url(#icon-gradient)"/>
-  <g transform="translate(37 30)">
-    <path d="M19 7H13C10.2386 7 8 9.23858 8 12V42C8 44.7614 10.2386 47 13 47H41C43.7614 47 46 44.7614 46 42V12C46 9.23858 43.7614 7 41 7H35" stroke="#0A1322" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M19 7C19 4.23858 21.2386 2 24 2H30C32.7614 2 35 4.23858 35 7C35 9.76142 32.7614 12 30 12H24C21.2386 12 19 9.76142 19 7Z" stroke="#0A1322" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M19 28L24 33L35 22" stroke="#0A1322" stroke-width="4.5" stroke-linecap="round" stroke-linejoin="round"/>
-  </g>
+
+  <rect x="10" y="10" width="108" height="108" rx="32" fill="url(#exam-bg)"/>
+  <rect x="10" y="10" width="108" height="108" rx="32" fill="white" fill-opacity="0.12"/>
+
+  <path
+    d="M39 28H74L89 43V84C89 89.5228 84.5228 94 79 94H39C33.4772 94 29 89.5228 29 84V38C29 32.4772 33.4772 28 39 28Z"
+    fill="url(#paper-fill)"
+  />
+  <path
+    d="M74 28L89 43H79C76.2386 43 74 40.7614 74 38V28Z"
+    fill="#F2D6B0"
+  />
+  <path
+    d="M39 28H74L89 43V84C89 89.5228 84.5228 94 79 94H39C33.4772 94 29 89.5228 29 84V38C29 32.4772 33.4772 28 39 28Z"
+    stroke="#20293A"
+    stroke-width="4"
+    stroke-linejoin="round"
+  />
+  <path d="M74 28V38C74 40.7614 76.2386 43 79 43H89" stroke="#20293A" stroke-width="4" stroke-linejoin="round"/>
+
+  <circle cx="48" cy="54" r="6" fill="#20293A"/>
+  <path d="M61 54H79" stroke="#20293A" stroke-width="4" stroke-linecap="round"/>
+  <circle cx="48" cy="70" r="6" fill="#20293A"/>
+  <path d="M61 70H79" stroke="#20293A" stroke-width="4" stroke-linecap="round"/>
+
+  <circle cx="58" cy="88" r="12" fill="#2F6C63"/>
+  <path d="M52 88.5L56.5 93L65 84.5" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
 </svg>
